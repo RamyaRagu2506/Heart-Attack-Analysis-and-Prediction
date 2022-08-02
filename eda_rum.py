@@ -9,5 +9,5 @@ heart_data= pd.read_csv('heart.csv')
 heart_restecg=heart_data.restecg
 print(heart_restecg)
 #restecg stat
-mode=np.mode(heart_restecg)
+mode=heart_restecg.mode()
 print(mode)
