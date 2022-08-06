@@ -14,3 +14,40 @@ Note: Use proper variables and do it slowly, no hurries, do one algorithm, eat, 
     Make sure u also remove - Age, Sex, Exng, oldpeak, caa, thall from the dataset and run the algorithm again (U will have two models per algorithm)
     Do as many as u can ma. :)
 """
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn import metrics
+from sklearn.metrics import confusion_matrix, classification_report
+
+#read the data 
+heart = pd.read_csv('heart.csv')
+print(heart.shape)
+
+#spilt it into features and label 
+features = heart.drop('output', axis=1)
+label =  heart['output']
+
+#model in use 
+svc = SVC()
+
+##Split the data into training and testing dataset with Shuffling
+X_train, X_test, y_train, y_test = train_test_split(features, label, test_size=0.3, shuffle=True)
+
+#fit into model
+model = svc.fit(X_train, y_train)
+
+#Predict using the test set
+y_pred = svc.predict(X_test)
+
+#confusion matrix
+conf = confusion_matrix(y_test, y_pred)
+cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = conf, display_labels = [False, True])
+cm_display.plot()
+plt.show()
+
+#confusion matrix metrics
+print(classification_report(y_test, y_pred))

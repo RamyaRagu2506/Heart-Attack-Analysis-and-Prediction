@@ -11,3 +11,40 @@
 10. Show the classification report (You can check on google, or ping me, naan solren enadhu. ) - Instead of precision, recall and accuracy
 
 """
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn import metrics
+from sklearn.metrics import confusion_matrix, classification_report
+
+#read the data 
+heart = pd.read_csv('heart.csv')
+print(heart.shape)
+
+#spilt it into features and label 
+features = heart.drop('output', axis=1)
+label =  heart['output']
+
+#model in use 
+gnb = GaussianNB()
+
+##Split the data into training and testing dataset with Shuffling
+X_train, X_test, y_train, y_test = train_test_split(features, label, test_size=0.3, shuffle=True)
+
+#fit into model
+model = gnb.fit(X_train, y_train)
+
+#Predict using the test set
+y_pred = gnb.predict(X_test)
+
+#confusion matrix
+conf = confusion_matrix(y_test, y_pred)
+cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = conf, display_labels = [False, True])
+cm_display.plot()
+plt.show()
+
+#confusion matrix metrics
+print(classification_report(y_test, y_pred))
