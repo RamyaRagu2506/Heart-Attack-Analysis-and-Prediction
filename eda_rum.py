@@ -9,6 +9,5 @@ heart_data= pd.read_csv('heart.csv')
 heart_restecg=heart_data.restecg
 print(heart_restecg)
 #restecg stat
-print(np.mean(heart_restecg))
-#find null vallues 
-heart_restecg.isnull().sum()
+mode=np.mode(heart_restecg)
+print(mode)
