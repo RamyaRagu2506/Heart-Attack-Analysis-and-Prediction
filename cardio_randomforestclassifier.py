@@ -8,8 +8,6 @@ from sklearn import metrics
 from sklearn.metrics import confusion_matrix, recall_score
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import chi2
 
 #Read data from file
 heart = pd.read_csv('heart.csv')
