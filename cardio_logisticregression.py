@@ -35,7 +35,7 @@ print(heart.shape)
 features = heart.drop('output', axis=1)
 label =  heart['output']
 
-#Model the data using rfc
+#Model the data using logreg
 logreg = LogisticRegression()
 
 #Split the data into training and testing dataset with Shuffling
